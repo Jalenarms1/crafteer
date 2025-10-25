@@ -10,7 +10,7 @@ import { BsUpload } from 'react-icons/bs'
 import { IoMdReverseCamera } from 'react-icons/io'
 import { handleDownload } from '../utils'
 import { CiWarning } from 'react-icons/ci'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useNavigation } from 'react-router-dom'
 
 const imagePositionDisplays: DesignPositionDisplay[] = [
   {
@@ -136,7 +136,7 @@ const OrderItemView = (params: OrderItemViewParams) => {
         <div className='w-3/4 h-screen shadow-zinc-700 flex flex-col items-center '>
             <div className='flex items-center bg-zinc-100 border-b border-zinc-200 w-full p-2 gap-2'>
             <IoArrowBack className='text-black'/>
-            <p onClick={() => navigate("/order")} className="text-black">Back</p>
+            <p onClick={() => navigate(-1)} className="text-black">Back</p>
             </div>
             <div className="w-full flex justify-between ">
             <div className="bg-white w-3/5 flex items-center justify-center overflow-hidden h-[70vh] flex-1 flex-col relative mx-auto">

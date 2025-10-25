@@ -3,6 +3,7 @@ import { useOrderContext } from '../Order/useOrderContext'
 import OrderItemView from './OrderItemView'
 import { useParams } from 'react-router-dom'
 import type { OrderItem } from './OrderItem'
+import BrandNavbar from '../components/BrandNavbar'
 
 const OrderItemPage = () => {
     const {order, setOrder, setOrderItem} = useOrderContext()
@@ -20,14 +21,15 @@ const OrderItemPage = () => {
     if(!hasLoaded) return;
     
   return (
-    <div>
-      <OrderItemView OnSave={(item) => {
-        console.log("saved");
-        console.log(item);
-        
-        
-        setOrderItem(item)
-      }} ExistingItem={existingItem} />
+    <div className='flex flex-col'>
+        <BrandNavbar />
+        <OrderItemView OnSave={(item) => {
+            console.log("saved");
+            console.log(item);
+            
+            
+            setOrderItem(item)
+        }} ExistingItem={existingItem} />
     </div>
   )
 }

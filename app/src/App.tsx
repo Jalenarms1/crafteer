@@ -14,9 +14,9 @@ function App() {
 
   return (
     <OrderProvider>
-      <div className="flex flex-col">
+      <div className="flex flex-col max-h-screen font-mono">
         <Router>
-          <BrandNavbar />
+          {/* <BrandNavbar /> */}
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/order-item/new' element={<OrderItemPage />} />
