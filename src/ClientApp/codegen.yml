@@ -1,0 +1,4 @@
+schema: http://localhost:5259/graphql
+generates:
+  ./src/graphql/generated/:
+    preset: client

@@ -3,3 +3,7 @@ Test/
 bin/
 obj/
 *.sh
+node_modules
+*.fgp
+*.graphql
+packaged/

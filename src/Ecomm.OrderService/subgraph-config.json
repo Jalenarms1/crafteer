@@ -1,0 +1,6 @@
+{
+  "subgraph": "OrderService",
+  "http": {
+    "baseAddress": "http://order-service:8081/graphql"
+  }
+}

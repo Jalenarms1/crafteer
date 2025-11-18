@@ -1,0 +1,6 @@
+@import '_content/Microsoft.FluentUI.AspNetCore.Components/css/reboot.css';
+ 
+*>* {
+    padding: 0;
+    margin: 0;
+}

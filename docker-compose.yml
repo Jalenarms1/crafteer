@@ -1,0 +1,65 @@
+
+services:
+  ecomm-api-gateway:
+    build: 
+      dockerfile: ./src/Ecomm.Api/Dockerfile
+      context: .
+    container_name: ecomm-api-gateway
+    ports: [8080:8080]
+    networks:
+      - ecomm-net
+    depends_on:
+      - rabbitmq
+      - order-service
+
+    environment:
+      RABBITMQ_USER: ${RABBITMQ_USER}
+      RABBITMQ_PASS: ${RABBITMQ_PASS}
+  order-service:
+    build: 
+      dockerfile: ./src/Ecomm.OrderService/Dockerfile
+      context: .
+    container_name: order-service
+    ports: [8081:8081]
+    networks:
+      - ecomm-net
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://order-service:8081/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+    environment:
+      ASPNETCORE_URLS: "http://0.0.0.0:8081"
+      RABBITMQ_USER: ${RABBITMQ_USER}
+      RABBITMQ_PASS: ${RABBITMQ_PASS}
+    
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: ecomm-bus
+    ports: 
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+    volumes: 
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - ecomm-net
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+networks: 
+  ecomm-net:
+
+volumes:
+  rabbitmq_data:
+    
